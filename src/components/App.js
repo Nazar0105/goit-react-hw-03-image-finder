@@ -22,12 +22,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    
     this.fetchImagesData();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    
     if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
       this.fetchImagesData();
     }
@@ -52,15 +50,13 @@ class App extends Component {
     }
   };
 
- handleFormSubmit = (newQuery) => {
-  this.setState({
-    query: newQuery,
-    page: 1,
-    images: [],
-  });
-};
-
-
+  handleFormSubmit = (newQuery) => {
+    this.setState({
+      query: newQuery,
+      page: 1,
+      images: [],
+    });
+  };
 
   handleLoadMore = () => {
     this.setState((prevState) => ({
@@ -83,7 +79,7 @@ class App extends Component {
   };
 
   render() {
-   
+    const { query, images, largeImageURL, showModal, loading } = this.state;
 
     return (
       <div className={styles.App}>
