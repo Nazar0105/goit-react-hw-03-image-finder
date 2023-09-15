@@ -52,13 +52,15 @@ class App extends Component {
     }
   };
 
-  handleFormSubmit = (newQuery) => {
-    this.setState({
-      query: newQuery,
-      page: 1,
-      images: [],
-    });
-  };
+ handleFormSubmit = (newQuery) => {
+  this.setState({
+    query: newQuery,
+    page: 1,
+    images: [],
+  });
+};
+
+
 
   handleLoadMore = () => {
     this.setState((prevState) => ({
