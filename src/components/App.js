@@ -79,7 +79,7 @@ class App extends Component {
   };
 
   render() {
-    const { query, images, largeImageURL, showModal, loading } = this.state;
+    const { images, largeImageURL, showModal, loading } = this.state;
 
     return (
       <div className={styles.App}>
@@ -96,3 +96,4 @@ class App extends Component {
 }
 
 export default App;
+
