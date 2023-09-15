@@ -22,12 +22,35 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // Логіка, яка виконується після монтування компонента
+    
+    this.fetchImagesData();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // Логіка, яка виконується після оновлення компонента
+    
+    if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
+      this.fetchImagesData();
+    }
   }
+
+  fetchImagesData = async () => {
+    const { query, page } = this.state;
+    if (!query) return;
+
+    this.setState({ loading: true });
+
+    try {
+      const data = await fetchImages(query, page);
+
+      this.setState((prevState) => ({
+        images: [...prevState.images, ...data],
+      }));
+    } catch (error) {
+      console.error('Error fetching images:', error);
+    } finally {
+      this.setState({ loading: false });
+    }
+  };
 
   handleFormSubmit = (newQuery) => {
     this.setState({
