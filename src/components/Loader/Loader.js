@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Loader.module.css'; // Вам потрібно підключити стилі для вашого лоадера
+import styles from './Loader.module.css';
 
 const Loader = ({ visible, height, width, ariaLabel, wrapperClass, wrapperStyle }) => {
   if (!visible) {
-    return null; // Якщо `visible` - `false`, лоадер не буде відображений
+    return null;
   }
 
   return (
@@ -42,3 +42,4 @@ Loader.defaultProps = {
 };
 
 export default Loader;
+
