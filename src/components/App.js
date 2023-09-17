@@ -85,7 +85,7 @@ class App extends Component {
       <div className={styles.App}>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery images={images} onImageClick={this.handleImageClick} />
-        {loading && <Loader />}
+        {loading && <Loader visible={true} />}
         {images.length > 0 && <Button onClick={this.handleLoadMore} />}
         {showModal && (
           <Modal largeImageURL={largeImageURL} onClose={this.closeModal} />

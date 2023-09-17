@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Searchbar.module.css';
-import Loader from '../Loader/Loader'; // Змінено імпорт на Loader
-
+// import Loader from '../Loader/Loader';
 
 class Searchbar extends Component {
   state = {
     query: '',
-    isLoading: false, // Додайте стан для відстеження завантаження
+    isLoading: false,
   };
 
   handleChange = (e) => {
@@ -17,10 +16,10 @@ class Searchbar extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { query } = this.state;
-    if (query.trim() === '') return; // Перевірка на пустий запит
-    this.setState({ isLoading: true }); // Встановлення стану isLoading перед запитом
+    if (query.trim() === '') return;
+    this.setState({ isLoading: true });
     this.props.onSubmit(query);
-    this.setState({ query: '', isLoading: false }); // Скидання стану після відправки запиту
+    this.setState({ query: '', isLoading: false });
   };
 
   render() {
@@ -32,19 +31,12 @@ class Searchbar extends Component {
           <button
             type="submit"
             className={styles.SearchFormButton}
-            disabled={isLoading} // Вимкнути кнопку під час завантаження
+            disabled={isLoading}
           >
             {isLoading ? (
-              <Loader
-                visible={true}
-                height="20" // Налаштуйте розмір відповідно до вашого Loader компонента
-                width="20" // Налаштуйте розмір відповідно до вашого Loader компонента
-                ariaLabel="dna-loading"
-                wrapperStyle={{}}
-                wrapperClass="dna-wrapper"
-              />
+              'Loading...'
             ) : (
-              <span className={styles.SearchFormButtonLabel}>Search</span>
+              'Search'
             )}
           </button>
           <input
@@ -55,7 +47,7 @@ class Searchbar extends Component {
             placeholder="Search images and photos"
             value={query}
             onChange={this.handleChange}
-            disabled={isLoading} // Вимкнути введення під час завантаження
+            disabled={isLoading}
           />
         </form>
       </header>
