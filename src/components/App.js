@@ -18,6 +18,7 @@ class App extends Component {
       largeImageURL: '',
       showModal: false,
       loading: false,
+      hasMoreImages: true, // Додайте стан для відстеження наявності більше зображень
     };
   }
 
@@ -32,8 +33,8 @@ class App extends Component {
   }
 
   fetchImagesData = async () => {
-    const { query, page } = this.state;
-    if (!query) return;
+    const { query, page, hasMoreImages } = this.state;
+    if (!query || !hasMoreImages) return; // Перевірте hasMoreImages перед відправкою запиту
 
     this.setState({ loading: true });
 
@@ -42,6 +43,7 @@ class App extends Component {
 
       this.setState((prevState) => ({
         images: [...prevState.images, ...data],
+        hasMoreImages: data.length === 12, // Перевірте, чи є більше зображень для завантаження
       }));
     } catch (error) {
       console.error('Error fetching images:', error);
@@ -55,6 +57,7 @@ class App extends Component {
       query: newQuery,
       page: 1,
       images: [],
+      hasMoreImages: true, // Скидайте hasMoreImages при новому пошуковому запиті
     });
   };
 
@@ -79,14 +82,14 @@ class App extends Component {
   };
 
   render() {
-    const { images, largeImageURL, showModal, loading } = this.state;
+    const { images, largeImageURL, showModal, loading, hasMoreImages } = this.state;
 
     return (
       <div className={styles.App}>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery images={images} onImageClick={this.handleImageClick} />
         {loading && <Loader visible={true} />}
-        {images.length > 0 && <Button onClick={this.handleLoadMore} />}
+        {hasMoreImages && images.length > 0 && <Button onClick={this.handleLoadMore} />}
         {showModal && (
           <Modal largeImageURL={largeImageURL} onClose={this.closeModal} />
         )}
@@ -96,4 +99,3 @@ class App extends Component {
 }
 
 export default App;
-
